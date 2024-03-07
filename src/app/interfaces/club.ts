@@ -16,3 +16,12 @@ export interface ClubData {
     image?: any;
 }
 
+export interface ClubCreate {
+    name: string;
+    address: string;
+    cuit: string;
+    stadiumName: string;
+    idTournament: number;
+    image?: any;
+}
+

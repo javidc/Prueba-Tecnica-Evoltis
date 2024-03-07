@@ -4,6 +4,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [],
@@ -13,12 +14,14 @@ import { InputTextModule } from 'primeng/inputtext';
     ButtonModule,
     PaginatorModule,
     InputTextModule,
+    DropdownModule
   ],
   exports: [
     TableModule,
     ButtonModule,
     PaginatorModule,
-    InputTextModule
+    InputTextModule,
+    DropdownModule
   ],
 })
 export class PrimengModule { }

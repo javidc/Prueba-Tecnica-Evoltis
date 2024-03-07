@@ -10,12 +10,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { PrimengModule } from './primeng/primeng.module';
 import { ClubViewComponent } from './pages/club-view/club-view.component';
+import { ClubCreateComponent } from './pages/club-create/club-create.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClubesViewComponent,
     ClubViewComponent,
+    ClubCreateComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -25,6 +29,8 @@ import { ClubViewComponent } from './pages/club-view/club-view.component';
     PrimengModule,
     StoreModule.forRoot({}, {}),
     ToastrModule.forRoot(),
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

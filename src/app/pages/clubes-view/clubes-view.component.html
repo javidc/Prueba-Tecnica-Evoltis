@@ -1,10 +1,12 @@
 <!-- <app-spinner *ngIf="isLoading"></app-spinner> -->
 <p-table [value]="clubs" [tableStyle]="{'min-width': '60rem'}">
   <ng-template pTemplate="caption">
-      <div class="flex align-items-center justify-content-between">
-          Clubes
-          <p-button icon="pi pi-plus"></p-button>
-      </div>
+    <div class="flex align-items-center justify-content-between">
+      Clubes
+      <a [routerLink]="['/club/create']">
+        <p-button icon="pi pi-plus"></p-button>
+      </a>
+    </div>
   </ng-template>
   <ng-template pTemplate="header">
       <tr>

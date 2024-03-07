@@ -1,0 +1,76 @@
+<div class="component-container">
+    <div class="background"></div>
+    <div class="form-card">
+      <div class="title-container">
+        <h2 class="component-title">Nuevo Club</h2>
+      </div>
+      <form [formGroup]="clubCreate" class="form-container">
+        <div class="form-field">
+          <label for="name" class="form-label">Nombre del club<span class="text-danger">*</span></label>
+          <input formControlName="name" pInputText class="form-input" type="text" placeholder="Ingrese un nombre...">
+          <small *ngIf="clubCreate.get('name')?.invalid && clubCreate.get('name')?.touched" class="text-danger">Este campo es obligatorio.</small>
+        </div>
+        <div class="field">
+          <i
+            class="pi pi-angle-right"
+            style="font-size: 0.8rem; color: #00a6c8"
+          ></i>
+          <label for="tournament" class="font-semibold"
+            >Campeonatos existentes<span class="text-danger ml-1"
+              >*</span
+            ></label
+          >
+          <div>
+            <p-dropdown
+            [(ngModel)]="selectedTournamentId"
+            [showClear]="true"
+            placeholder="Seleccione el campeonato"
+            inputId="dropdown"
+            optionLabel="Campeonato"
+            appendTo="body"
+            class="w-full h-input"
+            formControlName="idTournament"
+            [options]="tournaments"
+            optionLabel="name"
+            emptyFilterMessage="No se encuentran resultados"
+            emptyMessage="No se encuentran resultados"
+          >
+          </p-dropdown> 
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="address" class="form-label">Dirección<span class="text-danger">*</span></label>
+          <input formControlName="address" pInputText class="form-input" type="text" placeholder="Ingrese una dirección...">
+          <small *ngIf="clubCreate.get('address')?.invalid && clubCreate.get('address')?.touched" class="text-danger">Este campo es obligatorio.</small>
+        </div>
+        <div class="form-field">
+          <label for="cuit" class="form-label">CUIT<span class="text-danger">*</span></label>
+          <input formControlName="cuit" pInputText class="form-input" type="text" placeholder="Ingrese un CUIT...">
+          <small *ngIf="clubCreate.get('cuit')?.invalid && clubCreate.get('cuit')?.touched" class="text-danger">Este campo es obligatorio.</small>
+        </div>
+
+        <div class="form-field">
+          <label for="stadiumName" class="form-label">Nombre del estadio<span class="text-danger">*</span></label>
+          <input formControlName="stadiumName" pInputText class="form-input" type="text" placeholder="Ingrese el nombre del estadio...">
+          <small *ngIf="clubCreate.get('stadiumName')?.invalid && clubCreate.get('stadiumName')?.touched" class="text-danger">Este campo es obligatorio.</small>
+        </div>
+      <div class="form-field">
+        <div class="file-upload">
+          <label for="fileInput" class="updateImage">
+            <img class="team-logo" [src]="imageClub" />
+            <i class="updateImageIcon pi pi-plus-circle"></i>
+            <span class="updateImageText">Subir logo del club</span>
+          </label>
+          <input id="fileInput" type="file" accept="image/*" style="display: none;" (change)="onFileSelected($event)">
+        </div>
+        <small class="updateImageHelpText">Seleccione una imagen (formato: .jpg, .png)</small>
+      </div>      
+      <div class="form-actions">
+        <p-button label="Cancelar" class="form-button-cancel" (onClick)="cancelate()"></p-button>
+        <p-button label="Guardar" class="form-button-save" (onClick)="onSubmit()"></p-button>
+      </div>
+</form>
+    </div>
+  </div>
+  
+ 

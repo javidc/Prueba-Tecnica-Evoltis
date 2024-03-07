@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 import { ClubsService } from '../../services/club.service';
 import { ClubData } from 'src/app/interfaces/club';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-clubes-view',
@@ -14,9 +13,8 @@ export class ClubesViewComponent implements OnInit {
   public clubs: ClubData[] = [];
 
   constructor(
-    private formBuilder: FormBuilder,
     private clubService: ClubsService,
-    private toastR: ToastrService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -41,5 +39,11 @@ export class ClubesViewComponent implements OnInit {
 
       }
     );
+  }
+
+  newClub() {
+    this.router.navigateByUrl(`club/new`, {
+      skipLocationChange: false,
+    });
   }
 }
