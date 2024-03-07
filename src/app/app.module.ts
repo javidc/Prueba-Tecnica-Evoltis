@@ -5,18 +5,30 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { ClubesViewComponent } from './pages/clubes-view/clubes-view.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { PrimengModule } from './primeng/primeng.module';
+import { ClubViewComponent } from './pages/club-view/club-view.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ClubesViewComponent,
+    ClubViewComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
+    EffectsModule.forRoot([]),  
+    HttpClientModule,
+    PrimengModule,
     StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([])
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+

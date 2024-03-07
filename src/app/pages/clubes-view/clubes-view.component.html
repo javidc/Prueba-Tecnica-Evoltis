@@ -1,0 +1,36 @@
+<!-- <app-spinner *ngIf="isLoading"></app-spinner> -->
+<p-table [value]="clubs" [tableStyle]="{'min-width': '60rem'}">
+  <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+          Clubes
+          <p-button icon="pi pi-plus"></p-button>
+      </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+      <tr>
+          <th>Logo</th>
+          <th>Nombre</th>
+          <th>Dirección</th>
+          <th>CUIT</th>
+          <th>Estadio</th>
+          <th>Campeonato</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-club>
+      <tr>
+          <td><img [src]="club.image" alt="Logo Club" width="60" class="shadow-4"></td>
+          <td>{{club.name}}</td>
+          <td>{{club.address}}</td>
+          <td>{{club.cuit}}</td>
+          <td>{{club.stadiumName}}</td>
+          <td>{{club.tournament}}</td>
+          <!-- <td><p-tag [value]="club.active" [severity]="getSeverity(club.active)"></p-tag></td> -->
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+          Hay {{clubs ? clubs.length : 0 }} clubes en total.
+      </div>
+  </ng-template>
+</p-table>
+
