@@ -7,6 +7,35 @@
         <p-button icon="pi pi-plus"></p-button>
       </a>
     </div>
+    <div class="col-6 md:col-6 lg:col-6 xl:col-4 align-items-center justify-content-center text-center">
+    <input
+      pInputText
+      type="text"
+      placeholder="Buscar por nombre:"
+      [(ngModel)]="nameFilter"
+      (input)="getClubs()"
+      class="ng-dirty text-base text-color surface-overlay p-2 border-1 border-solid border-round appearance-none surface-border outline-none h-3rem focus:border-primary w-full"
+    />
+  </div>
+  <div class="col-6 md:col-6 lg:col-6 xl:col-4 align-items-center justify-content-center text-center">
+    <div>
+      <p-dropdown
+      [(ngModel)]="selectedTournamentId"
+      [showClear]="true"
+      placeholder="Seleccione el campeonato"
+      inputId="dropdown"
+      optionLabel="Campeonato"
+      appendTo="body"
+      class="w-full h-input"
+      (onChange)="getClubs()"
+      [options]="tournaments"
+      optionLabel="name"
+      emptyFilterMessage="No se encuentran resultados"
+      emptyMessage="No se encuentran resultados"
+    >
+    </p-dropdown> 
+    </div>
+  </div>
   </ng-template>
   <ng-template pTemplate="header">
       <tr>
@@ -16,6 +45,7 @@
           <th>CUIT</th>
           <th>Estadio</th>
           <th>Campeonato</th>
+          <th>Acciones</th>
       </tr>
   </ng-template>
   <ng-template pTemplate="body" let-club>
@@ -26,6 +56,7 @@
           <td>{{club.cuit}}</td>
           <td>{{club.stadiumName}}</td>
           <td>{{club.tournament}}</td>
+          <td><p-button icon="pi pi-pencil" label="Editar"></p-button></td>
           <!-- <td><p-tag [value]="club.active" [severity]="getSeverity(club.active)"></p-tag></td> -->
       </tr>
   </ng-template>
