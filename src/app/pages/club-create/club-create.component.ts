@@ -61,10 +61,12 @@ export class ClubCreateComponent implements OnInit {
   
     this.clubService.CreateClub(formData).then(
       (resp: any) => {
-        if (resp.message === 'Liga actualizada exitosamente') {
+        if (resp.code === 200) {
+          console.log("entre");
+          
           this.toastR.success(
-            `Club ${this.clubCreate.controls['name'].value}`,
-            'creada exitosamente',
+            `Club`,
+            'creado exitosamente',
             {
               timeOut: 5000,
               closeButton: true,

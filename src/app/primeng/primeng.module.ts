@@ -5,6 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [],
@@ -14,14 +15,16 @@ import { DropdownModule } from 'primeng/dropdown';
     ButtonModule,
     PaginatorModule,
     InputTextModule,
-    DropdownModule
+    DropdownModule,
+    ToastrModule
   ],
   exports: [
     TableModule,
     ButtonModule,
     PaginatorModule,
     InputTextModule,
-    DropdownModule
+    DropdownModule,
+    ToastrModule
   ],
 })
 export class PrimengModule { }

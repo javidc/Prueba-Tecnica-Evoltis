@@ -33,6 +33,15 @@
       <div class="flex align-items-center justify-content-between">
           Hay {{clubs ? clubs.length : 0 }} clubes en total.
       </div>
+      <div>
+        <p-paginator
+          [rows]="itemsPerPage"
+          [totalRecords]="totalQuantity"
+          [first]="(actualPage - 1) * itemsPerPage"
+          (onPageChange)="changePage($event)"
+          [rowsPerPageOptions]="[5, 10, 15, 30, 50]"
+        ></p-paginator>
+      </div>
   </ng-template>
 </p-table>
 

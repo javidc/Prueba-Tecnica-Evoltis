@@ -27,8 +27,19 @@ import { DomSanitizer } from "@angular/platform-browser";
         });
       }
 
-      GetClubs(): Observable<HttpResponse<PaginationClub>> {
-        const url = `${this.baseUrl}/filters?Pagination.IsPaginated=false`;
+      GetClubs(
+        name?: any | null,
+        idTournament?: any | null,
+        Pagination?: any,
+      ): Observable<HttpResponse<PaginationClub>> {
+        let url = `${this.baseUrl}/filters?`;
+        if (name) {
+          url = url + `Name=${name}`;
+        }
+        if (idTournament) {
+          url = url + `IdTournament=${idTournament}`;
+        }
+        url = url + `&Pagination.IsPaginated=true&Pagination.Page=${Pagination.Page}&Pagination.AmountRegistersPage=${Pagination.AmountRegistersPage}`;
         return this.http.get<HttpResponse<PaginationClub>>(url);
       }
 
