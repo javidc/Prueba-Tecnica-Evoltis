@@ -1,4 +1,4 @@
 export interface Tournament{
-    IdTournament: number;
+    idTournament: number;
     Name: string; 
 }

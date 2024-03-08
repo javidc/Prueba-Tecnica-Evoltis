@@ -53,11 +53,16 @@
   }
   
   .form-button-cancel {
-    background-color: #ccc;
+    background-color: #007bff;
   }
   
   .form-button-save {
     background-color: #007bff;
+    color: #fff;
+  }
+
+  .form-button-save :disabled {
+    background-color: grey;
     color: #fff;
   }
   
@@ -96,6 +101,10 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.1);
     z-index: -1;
+  }
+
+  .team-logo {
+    max-width: 100%;
   }
   
   

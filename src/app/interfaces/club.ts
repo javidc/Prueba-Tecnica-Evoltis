@@ -16,6 +16,18 @@ export interface ClubData {
     image?: any;
 }
 
+export interface ClubUpdateData {
+    idClub: number;
+    name: string;
+    address: string;
+    cuit: string;
+    fileName: string;
+    stadiumName: string;
+    idTournament: number;
+    active: boolean;
+    image?: any;
+}
+
 export interface ClubCreate {
     name: string;
     address: string;

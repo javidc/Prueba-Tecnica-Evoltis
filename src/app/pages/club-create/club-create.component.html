@@ -22,6 +22,7 @@
           >
           <div>
             <p-dropdown
+            styleClass="w-full"
             [(ngModel)]="selectedTournamentId"
             [showClear]="true"
             placeholder="Seleccione el campeonato"
@@ -66,8 +67,9 @@
         <small class="updateImageHelpText">Seleccione una imagen (formato: .jpg, .png)</small>
       </div>      
       <div class="form-actions">
-        <p-button label="Cancelar" class="form-button-cancel" (onClick)="cancelate()"></p-button>
-        <p-button label="Guardar" class="form-button-save" (onClick)="onSubmit()"></p-button>
+        <button pButton label="Cancelar" class="form-button-cancel" (click)="cancelate()"></button>
+        <button *ngIf="urlView !== 'update'" pButton label="Guardar" class="form-button-save" [disabled]="this.clubCreate.invalid || !imageClub" (click)="onSubmit()"></button>
+        <button *ngIf="urlView === 'update'" pButton label="Modificar" class="form-button-save" [disabled]="this.clubCreate.invalid || !imageClub" (click)="edit()"></button>
       </div>
 </form>
     </div>

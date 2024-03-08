@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Pagination } from 'src/app/interfaces/paginations';
 import { Tournament } from 'src/app/interfaces/tournament';
 import { TournamentsService } from 'src/app/services/tournament.service';
+import { DataBindingClubService } from 'src/app/services/data-binding-club';
 
 @Component({
   selector: 'app-clubes-view',
@@ -17,7 +18,7 @@ export class ClubesViewComponent implements OnInit {
   public tournaments: Tournament[] = [];
   public selectedTournamentId: any;
   public nameFilter?: string;
-  public idTournamentFilter!: number;
+  public idTournamentFilter!: number | null;
   public itemsPerPage: number = 5;
   public actualPage: number = 1;
   public totalQuantity!: number;
@@ -31,7 +32,8 @@ export class ClubesViewComponent implements OnInit {
   constructor(
     private clubService: ClubsService,
     private router: Router,
-    private tournamentService: TournamentsService
+    private tournamentService: TournamentsService,
+    private dataBindingClubService: DataBindingClubService
   ) { }
 
   ngOnInit(): void {
@@ -40,29 +42,31 @@ export class ClubesViewComponent implements OnInit {
   }
 
   getClubs() {
-    if(this.selectedTournamentId)
-    {
+    if (this.selectedTournamentId) {
       let id = this.selectedTournamentId.idTournament;
       this.idTournamentFilter = id;
     }
+    
     this.clubService.GetClubs(
       this.nameFilter ? this.nameFilter : null,
       this.idTournamentFilter ? this.idTournamentFilter : null,
       this.Pagination).subscribe((resp) => {
-        if (!resp.response) {
+        if (resp.response) {
+          this.clubs = resp.response.lstClubsGetDto;
+          this.totalQuantity = resp.response.totalQuantity;
+          this.numberOfPages = resp.response.numberOfPages;
+          this.clubs.forEach((club) => {
+            this.getImage(club);
+          });
+        }
+        else{
           this.clubs = [];
         }
-      this.clubs = resp.response.lstClubsGetDto;
-      this.totalQuantity = resp.response.totalQuantity;
-      this.numberOfPages = resp.response.numberOfPages;
-        this.clubs.forEach((club) => {
-          this.getImage(club);
-        });
-    });
+
+      });
   }
 
-  getTournaments()
-  {
+  getTournaments() {
     this.tournamentService.GetTournaments().subscribe((resp) => {
       this.tournaments = resp.response;
     });
@@ -85,10 +89,21 @@ export class ClubesViewComponent implements OnInit {
     });
   }
 
-      // Cambios en la pagina a visualizar.
-      changePage(event: any) {
-        this.Pagination.Page = event.page + 1;
-        this.Pagination.AmountRegistersPage = event.rows;
-        this.getClubs();
-      }
+  clearInputs() {
+    this.selectedTournamentId = null;
+    this.idTournamentFilter = null;
+    this.getClubs();
+  }
+
+  // Cambios en la pagina a visualizar.
+  changePage(event: any) {
+    this.Pagination.Page = event.page + 1;
+    this.Pagination.AmountRegistersPage = event.rows;
+    this.getClubs();
+  }
+
+  saveIdClub(idClub: number)
+  {
+    this.dataBindingClubService.saveClubID(idClub);
+  }
 }
