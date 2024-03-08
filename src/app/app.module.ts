@@ -9,7 +9,6 @@ import { ClubesViewComponent } from './pages/clubes-view/clubes-view.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { PrimengModule } from './primeng/primeng.module';
-import { ClubViewComponent } from './pages/club-view/club-view.component';
 import { ClubCreateComponent } from './pages/club-create/club-create.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,7 +17,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   declarations: [
     AppComponent,
     ClubesViewComponent,
-    ClubViewComponent,
     ClubCreateComponent,
   ],
   imports: [

@@ -6,6 +6,7 @@ import { Pagination } from 'src/app/interfaces/paginations';
 import { Tournament } from 'src/app/interfaces/tournament';
 import { TournamentsService } from 'src/app/services/tournament.service';
 import { DataBindingClubService } from 'src/app/services/data-binding-club';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-clubes-view',
@@ -33,7 +34,8 @@ export class ClubesViewComponent implements OnInit {
     private clubService: ClubsService,
     private router: Router,
     private tournamentService: TournamentsService,
-    private dataBindingClubService: DataBindingClubService
+    private dataBindingClubService: DataBindingClubService,
+    private toastR: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -95,7 +97,6 @@ export class ClubesViewComponent implements OnInit {
     this.getClubs();
   }
 
-  // Cambios en la pagina a visualizar.
   changePage(event: any) {
     this.Pagination.Page = event.page + 1;
     this.Pagination.AmountRegistersPage = event.rows;
@@ -106,4 +107,42 @@ export class ClubesViewComponent implements OnInit {
   {
     this.dataBindingClubService.saveClubID(idClub);
   }
+
+  disable(idClub: number) {
+    this.clubService.Disable(idClub).then((resp: any) => {
+      if (resp.code === 200) {
+        
+        this.toastR.success(
+          `Dado de baja exitosamente`,
+          'Club desactivado',
+          {
+            timeOut: 5000,
+            closeButton: false,
+          }
+        );
+        this.clearInputs();
+      } else {
+        this.toastR.error(
+          `Error`,
+          'No se pudo dar de baja el club',
+          {
+            timeOut: 5000,
+            closeButton: true,
+          }
+        );
+      }
+    }).catch(error => {
+      
+      this.toastR.error(
+        `${error.error.message}`,
+        `Ocurrió un error`,
+        {
+          timeOut: 5000,
+          closeButton: true,
+        }
+      );
+      console.error("Error al intentar dar de baja el club:", error);
+    });
+  }
+  
 }

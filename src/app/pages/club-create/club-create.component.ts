@@ -72,33 +72,49 @@ export class ClubCreateComponent implements OnInit, OnDestroy {
     formData.append('address', this.clubCreate.controls['address'].value);
     formData.append('stadiumName', this.clubCreate.controls['stadiumName'].value);
     if (this.clubCreate.controls['idTournament'].value) {
-      formData.append('idTournament', this.selectedTournamentId.idTournament
-      );
+      formData.append('idTournament', this.selectedTournamentId.idTournament);
     }
     if (this.imageFile) {
       formData.append('imageLogo', this.imageFile.file);
     }
-
-    this.clubService.CreateClub(formData).then(
-      (resp: any) => {
+  
+    this.clubService.CreateClub(formData)
+      .then((resp: any) => {
         if (resp.code === 200) {
           this.toastR.success(
-            `Club`,
-            'creado exitosamente',
+            `club creado exitosamente`,
+            'Nuevo club',
             {
               timeOut: 5000,
               closeButton: true,
             },
-
           );
           this.clubCreate.reset();
           this.router.navigateByUrl('', {
             skipLocationChange: false,
           });
+        } else {
+          this.toastR.error(
+            'Los datos no son correctos. Intente nuevamente.',
+            'Error al crear el club',
+            {
+              timeOut: 5000,
+              closeButton: true,
+            },
+          );
         }
-      }
-    );
-
+      })
+      .catch((error) => {
+        console.error('Error en la solicitud:', error);
+        this.toastR.error(
+          'Los datos no son correctos. Intente nuevamente.',
+          'Error al crear el club',
+          {
+            timeOut: 5000,
+            closeButton: true,
+          },
+        );
+      });
   }
 
   edit() {
@@ -109,33 +125,51 @@ export class ClubCreateComponent implements OnInit, OnDestroy {
     formData.append('address', this.clubCreate.controls['address'].value);
     formData.append('stadiumName', this.clubCreate.controls['stadiumName'].value);
     if (this.clubCreate.controls['idTournament'].value) {
-      formData.append('idTournament', this.selectedTournamentId.idTournament
-      );
+      formData.append('idTournament', this.selectedTournamentId.idTournament);
     }
     if (this.imageFile) {
       formData.append('imageLogo', this.imageFile.file);
     }
     formData.append('active', this.club.active.toString());
-
+  
     this.clubService.UpdateClub(formData).then(
       (resp: any) => {
         if (resp.code === 200) {
           this.toastR.success(
-            `Club`,
-            'modificado exitosamente',
+            `Club modificado exitosamente`,
+            'Club actualizado',
             {
               timeOut: 5000,
               closeButton: true,
-            },
-
+            }
           );
           this.router.navigateByUrl('', {
             skipLocationChange: false,
           });
+        } else {
+          this.toastR.error(
+            'Error al modificar el club',
+            `Código de error: ${resp.code}`,
+            {
+              timeOut: 5000,
+              closeButton: true,
+            }
+          );
         }
       }
-    );
+    ).catch((error) => {
+      console.error('Error en la solicitud:', error);
+      this.toastR.error(
+        'Los datos no son correctos. Intente nuevamente',
+        'Error al modificar el club',
+        {
+          timeOut: 5000,
+          closeButton: true,
+        }
+      );
+    });
   }
+  
 
   onFileSelected(event: any) {
     const fileInput = event.target;

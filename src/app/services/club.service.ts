@@ -71,6 +71,20 @@ export class ClubsService {
     const url = this.baseUrl + `/${idClub}`
     return this.http.get<HttpResponse<ClubUpdateData>>(url);
   }
+  
+  Disable(idClub: number) {
+    return new Promise<HttpResponse<null>>((resolve, reject) => {
+      const url = this.baseUrl + `/disable/${idClub}`
+      this.http.patch<HttpResponse<null>>(url, idClub).subscribe(
+        (resp) => {
+          resolve(resp);
+        },
+        (error) => {
+          reject(error);
+        },
+      );
+    });
+  }
 
 }
 

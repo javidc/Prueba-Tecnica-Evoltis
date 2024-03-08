@@ -1,0 +1,31 @@
+.header {
+    text-align: center;
+    padding: 20px 0;
+  }
+  
+  .header h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+
+.active {
+    color: white;
+    background-color: #4CAF50;
+    padding: 5px 10px; 
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .inactive {
+    color: white;
+    background-color: #FF5252;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .button-space {
+    margin-left: 10px;
+  }
+  
